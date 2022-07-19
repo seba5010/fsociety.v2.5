@@ -26,8 +26,6 @@ const UsersAdd = () => {
         errors += usersName.value.length === 0 ? "El campo 'Usuario' es obligatorio.\n" : "";
         errors += nickname.value.length === 0 ? "El campo 'Nickname' es obligatorio.\n" : "";
         errors += password.value.length === 0 ? "El campo 'Contraseña' es obligatorio.\n" : "";
-        errors += level.value.length === 0 ? "El campo 'Nivel' es obligatorio.\n" : "";
-        errors += level.value !== 'admin' && level.value !== 'seller' ? "El nivel debe ser 'admin' o 'seller'.\n" : "";
         
         if(errors.length > 0){
             window.alert("Corrija los siguientes errores:\n"+errors);
@@ -36,7 +34,7 @@ const UsersAdd = () => {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify({ "operatorId": config.operatorId, "name": usersName.value,"nicknamenam": nickname.value,"password": password.value,"level": level.value,
+                body: JSON.stringify({ "operatorId": config.operatorId, "name": usersName.value, "nickname": nickname.value, "password": password.value, "level": level.nivel,
                 "active": active.value})
               }
               fetch(config.apiURL+"users", requestOptions).then((response) => {
@@ -103,7 +101,11 @@ const UsersAdd = () => {
                                 <div className="col-4">
                                     <div className="form-group">
                                         <label htmlFor="level" className="control-label">Nivel</label>
-                                        <input type="string" name="level" id="level" className="form-control" required />
+                                        <select className="form-control" name="nivel" id="nivel">
+                                            <option value="seleccione">----seleccione</option>
+                                            <option value="admin">admin</option>
+                                            <option value="seller">vendedor</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div className="col-6">
